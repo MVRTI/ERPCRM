@@ -4,24 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateVentaPropuestasTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('venta_propuestas', function (Blueprint $table) {
-            $table->id();
+            $table->id('PropuestaID');
+            $table->unsignedBigInteger('ClienteID');
+            $table->foreign('ClienteID')->references('ClienteID')->on('clientes');
+            $table->dateTime('FechaCreacion');
+            $table->enum('Estado', ['Aceptada', 'Pendiente', 'Rechazada']);
+            $table->text('Detalles');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('venta_propuestas');
     }
-};
+}
+
