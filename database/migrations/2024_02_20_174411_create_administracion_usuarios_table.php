@@ -12,7 +12,6 @@ class CreateAdministracionUsuariosTable extends Migration
             $table->id('UsuarioID');
             $table->string('NombreUsuario');
             $table->string('Contraseña');
-            $table->text('Permisos');
             $table->timestamps();
         });
     }

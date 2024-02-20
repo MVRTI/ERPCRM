@@ -10,8 +10,7 @@ class CreateVentaPropuestasTable extends Migration
     {
         Schema::create('venta_propuestas', function (Blueprint $table) {
             $table->id('PropuestaID');
-            $table->unsignedBigInteger('ClienteID');
-            $table->foreign('ClienteID')->references('ClienteID')->on('clientes');
+            $table->foreignId('ClienteID')->constrained('clientes', 'ClienteID');
             $table->dateTime('FechaCreacion');
             $table->enum('Estado', ['Aceptada', 'Pendiente', 'Rechazada']);
             $table->text('Detalles');
@@ -24,4 +23,3 @@ class CreateVentaPropuestasTable extends Migration
         Schema::dropIfExists('venta_propuestas');
     }
 }
-

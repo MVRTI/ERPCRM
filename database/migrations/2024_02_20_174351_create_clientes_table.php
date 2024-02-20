@@ -13,10 +13,9 @@ class CreateClientesTable extends Migration
             $table->string('Nombre');
             $table->string('Apellido');
             $table->string('Email');
-            $table->string('Telefono');
-            $table->string('Direccion');
-            $table->unsignedBigInteger('TipoClienteID');
-            $table->foreign('TipoClienteID')->references('TipoClienteID')->on('tipos_de_cliente');
+            $table->string('Teléfono');
+            $table->string('Dirección');
+            $table->foreignId('TipoClienteID')->constrained('tipo_clientes', 'TipoClienteID');
             $table->timestamps();
         });
     }
