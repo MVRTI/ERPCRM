@@ -9,11 +9,5 @@ class TipoCliente extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'TipoClienteID';
-    protected $fillable = ['Descripción'];
 
-    public function clientes()
-    {
-        return $this->hasMany(Cliente::class, 'TipoClienteID');
-    }
 }

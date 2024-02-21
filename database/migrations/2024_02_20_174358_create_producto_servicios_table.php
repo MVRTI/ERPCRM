@@ -9,7 +9,7 @@ class CreateProductoServiciosTable extends Migration
     public function up()
     {
         Schema::create('producto_servicios', function (Blueprint $table) {
-            $table->id('ProductoServicioID');
+            $table->id();
             $table->string('Nombre');
             $table->text('Descripción');
             $table->decimal('Precio', 8, 2);

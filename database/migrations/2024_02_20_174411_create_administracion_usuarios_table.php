@@ -9,7 +9,7 @@ class CreateAdministracionUsuariosTable extends Migration
     public function up()
     {
         Schema::create('administracion_usuarios', function (Blueprint $table) {
-            $table->id('UsuarioID');
+            $table->id();
             $table->string('NombreUsuario');
             $table->string('Contraseña');
             $table->timestamps();

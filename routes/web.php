@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\TipoClienteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('clientgenerator');
 });
 
+Route::resource('clientes', ClienteController::class);
+Route::resource('tipos-clientes', TipoClienteController::class);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -9,7 +9,7 @@ class CreateTipoClientesTable extends Migration
     public function up()
     {
         Schema::create('tipo_clientes', function (Blueprint $table) {
-            $table->id('TipoClienteID');
+            $table->id();
             $table->string('Descripción');
             $table->timestamps();
         });
