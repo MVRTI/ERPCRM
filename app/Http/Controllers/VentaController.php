@@ -22,6 +22,7 @@ class VentaController extends Controller
 
     public function store(Request $request){
         $data = $request->validate([
+            
             'nombre'=> 'required',
             'detalles'=> 'required',
             'servicios_ofrecidos'=> 'required',
@@ -43,6 +44,7 @@ class VentaController extends Controller
 
     public function update(Venta $venta, Request $request){
         $data = $request->validate([
+            
             'nombre'=> 'required',
             'detalles'=> 'required',
             'servicios_ofrecidos'=> 'required',
