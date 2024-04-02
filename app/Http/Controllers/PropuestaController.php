@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\VentaPropuesta;
 use Illuminate\Http\Request;
+use App\Models\Propuesta;
 
-class VentaPropuestaController extends Controller
+class PropuestaController extends Controller
 {
     /**
      * Display a listing of the resource.
