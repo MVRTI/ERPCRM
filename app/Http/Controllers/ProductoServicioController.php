@@ -12,7 +12,8 @@ class ProductoServicioController extends Controller
      */
     public function index()
     {
-        //
+        $productos = ProductoServicio::all();
+        return view('productoservicioshow', compact('productos'));
     }
 
     /**
@@ -28,38 +29,85 @@ class ProductoServicioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'Nombre' => 'required|string|max:255',
+            'Descripcion' => 'required|string',
+            'Precio' => 'required|numeric',
+            'Stock' => 'required|integer',
+            'FechaEntrada' => 'required|date_format:Y-m-d\TH:i',
+        ]);
+
+        // Create a new ProductoServicio instance
+        $productoServicio = new ProductoServicio([
+            'Nombre' => $validatedData['Nombre'],
+            'Descripción' => $validatedData['Descripcion'],
+            'Precio' => $validatedData['Precio'],
+            'Stock' => $validatedData['Stock'],
+            'FechaEntrada' => $validatedData['FechaEntrada'],
+        ]);
+
+        // Save the ProductoServicio
+        $productoServicio->save();
+
+        // Redirect back with success message
+        return redirect()->route('producto.index')->with('success', 'ProductoServicio creado exitosamente.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ProductoServicio $productoServicio)
-    {
-        //
-    }
+    public function show(ProductoServicio $producto)
+{
+    return view('productodetail', compact('producto'));
+}
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ProductoServicio $productoServicio)
-    {
-        //
-    }
+public function edit($id)
+{
+    // Find the product
+    $producto = ProductoServicio::findOrFail($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ProductoServicio $productoServicio)
-    {
-        //
-    }
+    // Return the edit view with the product data
+    return view('productodetail', compact('producto'));
+}
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ProductoServicio $productoServicio)
+public function update(Request $request, $id)
+{
+    // Validate the incoming request data
+    $validatedData = $request->validate([
+        'Nombre' => 'required|string|max:255',
+        'Descripcion' => 'required|string',
+        'Precio' => 'required|numeric',
+        'Stock' => 'required|integer',
+        'FechaEntrada' => 'required|date_format:Y-m-d\TH:i',
+    ]);
+
+    // Find the product
+    $producto = ProductoServicio::findOrFail($id);
+
+    // Update the product with validated data
+    $producto->update([
+        'Nombre' => $validatedData['Nombre'],
+        'Descripción' => $validatedData['Descripcion'],
+        'Precio' => $validatedData['Precio'],
+        'Stock' => $validatedData['Stock'],
+        'FechaEntrada' => $validatedData['FechaEntrada'],
+    ]);
+
+    // Redirect back with success message
+    return redirect()->route('producto.index')->with('success', 'ProductoServicio actualizado exitosamente.');
+}
+
+
+public function destroy($ProductoServicioID)
     {
-        //
+        // Delete the product
+        $producto = ProductoServicio::find($ProductoServicioID);
+
+        $producto->delete();
+
+
+        // Redirect back with success message
+        return redirect()->route('producto.index')->with('success', 'ProductoServicio eliminado exitosamente.');
     }
 }
