@@ -13,9 +13,33 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();
-        return view('Cliente.index', compact('clientes'));
+        $clientes = Cliente::all(); 
+        return view('clientes', compact('clientes')); 
+        
     }
+
+    public function filtrarclientes(Request $request)
+{
+    if ($request->input('filtros') === 'sinfiltros') {
+        return redirect()->route('clientes.index');
+    }
+    $clientes = Cliente::query();
+    if ($request->has('poblacionText')) {
+        $clientes->where('Dirección', 'LIKE', '%' . $request->input('poblacionText') . '%');
+    }
+
+    if ($request->input('filtros') === 'Alta') {
+        $clientes->where('Estado', true); 
+    } elseif ($request->input('filtros') === 'Baja') {
+        $clientes->where('Estado', false); 
+    }
+
+    $clientes = $clientes->get();
+
+    return view('clientes', compact('clientes'));
+}
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +49,19 @@ class ClienteController extends Controller
         $tiposClientes = TipoCliente::all();
         return view('Cliente.create', compact('tiposClientes'));
     }
-
+    public function cambiarEstado(Request $request, Cliente $cliente)
+    {
+        $request->validate([
+            'estado' => 'required|in:Alta,Baja',
+        ]);
+    
+        $cliente->update([
+            'Estado' => $request->estado,
+        ]);
+    
+        return back()->with('success', 'Estado del cliente actualizado correctamente.');
+    }
+    
     /**
      * Store a newly created resource in storage.
      */
@@ -34,9 +70,10 @@ class ClienteController extends Controller
         $request->validate([
             'nombre' => 'required',
             'apellido' => 'required',
-            'email' => 'required|email|unique:clientes,Email',
+            'email' => 'required',
             'telefono' => 'required',
             'direccion' => 'required',
+            'estado' => 'required|in:Alta,Baja', 
         ]);
     
         $cliente = new Cliente();
@@ -45,10 +82,11 @@ class ClienteController extends Controller
         $cliente->Email = $request->email;
         $cliente->Teléfono = $request->telefono;
         $cliente->Dirección = $request->direccion;
-
+        $cliente->Estado = $request->estado; 
+    
         $cliente->save();
     
-        return redirect()->route('clientes.dashboard')->with('success', 'Cliente creado exitosamente.');
+        return redirect()->route('dashboard')->with('success', 'Cliente creado exitosamente.');
     }
     
 
@@ -72,26 +110,30 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cliente $cliente)
-    {
-        $request->validate([
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'email' => 'required|email',
-            'telefono' => 'required',
-            'direccion' => 'required',
-        ]);
+    /**
+ * Update the specified resource in storage.
+ */
+public function update(Request $request, Cliente $cliente)
+{
+    $request->validate([
+        'nombre' => 'required',
+        'apellido' => 'required',
+        'email' => 'required|email',
+        'telefono' => 'required',
+        'direccion' => 'required',
+    ]);
 
-        $cliente->update([
-            'Nombre' => $request->nombre,
-            'Apellido' => $request->apellido,
-            'Email' => $request->email,
-            'Teléfono' => $request->telefono,
-            'Dirección' => $request->direccion,
-        ]);
+    $cliente->update([
+        'Nombre' => $request->nombre,
+        'Apellido' => $request->apellido,
+        'Email' => $request->email,
+        'Teléfono' => $request->telefono,
+        'Dirección' => $request->direccion,
+    ]);
 
-        return redirect()->route('Cliente.index')->with('success', 'Cliente actualizado exitosamente.');
-    }
+    return redirect()->route('dashboard')->with('success', 'Cliente actualizado exitosamente.');
+}
+
 
     /**
      * Remove the specified resource from storage.
