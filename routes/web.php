@@ -19,6 +19,7 @@ use App\Http\Controllers\ProductoServicioController;
 
 Route::get('/', function () {
     return view('welcome');
+    return view('welcome');
 });
 
 Route::resource('productosservicios', ProductoServicioController::class);
