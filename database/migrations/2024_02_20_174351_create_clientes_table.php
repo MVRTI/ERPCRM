@@ -15,6 +15,7 @@ class CreateClientesTable extends Migration
             $table->string('Email');
             $table->string('Teléfono');
             $table->string('Dirección');
+            $table->enum('Estado', ['Alta', 'Baja'])->default('Alta'); 
             $table->timestamps();
         });
     }

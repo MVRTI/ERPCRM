@@ -31,6 +31,13 @@
                 <label for="direccion" class="form-label">Dirección</label>
                 <input type="text" class="form-control" id="direccion" name="direccion" required>
             </div>
+            <div class="mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <select class="form-select" id="estado" name="estado" required>
+                    <option value="Alta">Alta</option>
+                    <option value="Baja">Baja</option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
     </div>
