@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\TipoClienteController;
@@ -24,6 +25,7 @@ Route::get('/', function () {
 
 Route::resource('productosservicios', ProductoServicioController::class);
 Route::resource('clientes', ClienteController::class);
+Route::get('/dashboard', [ClienteController::class, 'dashboard'])->name('clientes.dashboard');
 Route::resource('tipos-clientes', TipoClienteController::class);
 
 Route::get('/dashboard', function () {
