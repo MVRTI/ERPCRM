@@ -85,22 +85,22 @@ Route::get('/clientgenerator', function () {
     return view('clientgenerator');
 })->name('clientgenerator');
 
-Route::get('/clientes', function () {
+/*Route::get('/clientes', function () {
     return view('clientes');
-})->name('clientes');
+})->name('clientes.index');*/
+Route::get('/verclientes', [ClienteController::class, 'index'])->name('verclientes.index');
 
 Route::resource('clientes', ClienteController::class);
 Route::resource('tipos-clientes', TipoClienteController::class);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/clientes', [ClienteController::class, 'filtrarclientes'])->name('clientes.filtrarclientes');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
-    Route::get('/clientes', [ClienteController::class, 'filtrarclientes'])->name('clientes.filtrarclientes');
     Route::patch('/clientes/{cliente}/cambiarEstado', [ClienteController::class, 'cambiarEstado'])->name('clientes.cambiarEstado');
 
 });

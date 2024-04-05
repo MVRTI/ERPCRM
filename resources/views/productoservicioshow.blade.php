@@ -45,6 +45,7 @@
 </head>
 <body>
     <div class="container mt-5">
+    <a href="{{ route('dashboard') }}" class="btn btn-secondary">Volver al Dashboard</a>
         <div class="row">
             <div class="col-6">
                 <h2 class="font px40 bold">Productos y servicios</h2>
