@@ -1,124 +1,51 @@
-
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            font-size: 20px;
-        }
-
-        .header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .btn-container {
-            display: flex;
-        }
-
-        .btn-container button {
-            margin-left: 10px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-
-        .btn {
-            padding: 6px 12px;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 20px;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
-            width: flex;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        .btn-success {
-            background-color: #28a745;
-            color: white;
-        }
-
-        .search-container {
-            margin-bottom: 20px;
-        }
-
-        .search-container input[type=text] {
-            padding: 10px;
-            margin-top: 10px;
-            font-size: 17px;
-            border: none;
-            width: 100%;
-        }
-    </style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <!-- Enlace al archivo CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
 <body>
 
-<div class="header">
-    <h1>Usuarios</h1>
+<div class="container">
+            <a href="{{ route('users.create') }}" class="btn btn-primary">Añadir Nuevo Usuario</a>
+            <a href="{{ route('dashboard') }}" class="btn btn-secondary">Volver al Dashboard</a>
+    <div class="header">
+        <h1>Usuarios</h1>
 
-    <div class="search-container">
-        <p>Total de usuarios: {{ $users->count() }}</p>
-        <a href="{{ route('users.create') }}" class="btn btn-primary">Añadir Nuevo Usuario</a>
-
+        <div class="search-container">
+            <p>Total de usuarios: {{ $users->count() }}</p>
+            
+        </div>
     </div>
-</div>
 
-<input type="text" id="searchInput" placeholder="Buscar usuario..." onkeyup="searchUsers()">
+    <input type="text" id="searchInput" class="form-control" placeholder="Buscar usuario..." onkeyup="searchUsers()">
 
-
-<table id="usersTable">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Correo Electrónico</th>
-            <th>Fecha de Creación</th>
-            <th>Roles</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($users as $user)
-            <tr style="cursor:pointer;" onclick="redirectToUser('{{ $user->id }}')">
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->created_at }}</td>
-                <td>{{ $user->role }}</td>
-                </td>
+    <table id="usersTable" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Correo Electrónico</th>
+                <th>Fecha de Creación</th>
+                <th>Roles</th>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach($users as $user)
+                <tr style="cursor:pointer;" onclick="redirectToUser('{{ $user->id }}')">
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->created_at }}</td>
+                    <td>{{ $user->role }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
 <script>
     function redirectToUser(userId) {
@@ -146,3 +73,4 @@
     }
 </script>
 </body>
+</html>

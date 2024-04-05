@@ -5,25 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Clientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<div class="container mt-3">
+    <a href="{{ route('dashboard') }}" class="btn btn-secondary">Volver al Dashboard</a>
+    <a href="{{ route('clientgenerator') }}" class="btn btn-primary">Generar Cliente</a>
+
+</div>
 </head>
 <body>
+    
     <div class="container mt-5">
-        <form action="#">
-            <form action="{{ route('clientes.filtrarclientes') }}" method="GET">
-                <label for="filtros">Filtros</label>
-                <select name="filtros" id="filtros">
-                    <option value="sinfiltros">Sin Filtros</option>
-                    <option value="poblacion">Poblacion</option>
-                    <option value="Alta">Alta</option>
-                    <option value="Baja">Baja</option>
-                </select>
-                
-                <div id="poblacionInput" style="display: none;">
-                    <label for="poblacionText">Introduce tu poblacion</label>
-                    <input type="text" id="poblacionText" name="poblacionText">
-                </div>
-            </form>
-        </form>
+    <div class="container mt-5">
+    <form action="{{ route('clientes.filtrarclientes') }}" method="GET">
+        <label for="filtros">Filtros</label>
+        <select name="filtros" id="filtros">
+            <option value="sinfiltros">Sin Filtros</option>
+            <option value="poblacion">Población</option>
+            <option value="Alta">Alta</option>
+            <option value="Baja">Baja</option>
+        </select>
+        
+        <div id="poblacionInput" style="display: none;">
+            <label for="poblacionText">Introduce tu población</label>
+            <input type="text" id="poblacionText" name="poblacionText">
+        </div>
+        
+        <button type="submit">Aplicar Filtros</button>
+    </form>
+</div>
+
         <h2>Listado de Clientes</h2>
         @if($clientes->isEmpty())
             <p>No hay clientes registrados.</p>
