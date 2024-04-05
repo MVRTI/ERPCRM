@@ -68,13 +68,13 @@
                         <th>Eliminar</th>
                     </tr>
                 </thead>
-                    @foreach($productos as $producto)
+                <tbody>
                     <tr>
-                        <td>{{ $producto->Nombre }}</td>
-                        <td>{{ $producto->Descripción }}</td>
-                        <td>{{ $producto->Precio }}</td>
-                        <td>{{ $producto->Stock }}</td>
-                        <td>{{ $producto->FechaEntrada }}</td>
+                        <td>Nombre</td>
+                        <td>Descripción</td>
+                        <td>Precio</td>
+                        <td>Stock</td>
+                        <td>FechaEntrada</td>
                         <td>
                             <a href="{{ route('productosservicios.edit', $producto->id) }}" class="btn btn-primary buttonblue">Editar</a>
                         </td>
@@ -83,10 +83,9 @@
                                 <button type="submit" class="btn btn-danger buttonred">Eliminar</button>
                             </form>
                         </td>
-                        
                     </tr>
-                    @endforeach
                 </tbody>
+                
             </table>
         </div>
     </div>
