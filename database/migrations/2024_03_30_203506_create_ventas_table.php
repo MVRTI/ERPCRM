@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('servicios_ofrecidos');
             $table->decimal('precio');
             $table->date('plazo');
-
+            $table->string('estado');
             $table->timestamps();
         });
     }

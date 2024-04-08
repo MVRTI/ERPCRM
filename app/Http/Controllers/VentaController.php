@@ -28,6 +28,8 @@ class VentaController extends Controller
             'servicios_ofrecidos'=> 'required',
             'precio'=> 'required|decimal:0,4',
             'plazo'=> 'required',
+            'estado'=> 'required',
+
         ]);
 
         $newVenta = Venta::create($data);
@@ -50,6 +52,8 @@ class VentaController extends Controller
             'servicios_ofrecidos'=> 'required',
             'precio'=> 'required|decimal:0,4',
             'plazo'=> 'required',
+            'estado'=> 'required',
+
         ]);
 
         $venta->update($data);

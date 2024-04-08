@@ -44,6 +44,14 @@
         <label for="plazo" class="form-label">Plazo</label>
         <input type="date" class="form-control" id="plazo" name="plazo" placeholder="Introduce plazo" value="{{$venta->plazo}}">
     </div>
+    <div class="mb-3">
+    <label for="estado" class="form-label">Estado</label>
+    <select class="form-select" id="estado" name="estado">
+        <option value="Pendiente" {{ $venta->estado == "Pendiente" ? 'selected' : '' }}>Pendiente</option>
+        <option value="Aceptada" {{ $venta->estado == "Aceptada" ? 'selected' : '' }}>Aceptada</option>
+        <option value="Rechazada" {{ $venta->estado == "Rechazada" ? 'selected' : '' }}>Rechazada</option>
+    </select>
+</div>
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 </body>

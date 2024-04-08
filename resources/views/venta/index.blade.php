@@ -12,6 +12,18 @@
             padding: 20px; /* Adjust padding as needed */
         }
 
+        .estado-pendiente {
+        color: orange; /* Color naranja */
+    }
+
+    .estado-aceptada {
+        color: green; /* Color verde */
+    }
+
+    .estado-rechazada {
+        color: red; /* Color rojo */
+    }
+
         .font {
             font-family: "Josefin Sans";
         }
@@ -68,6 +80,7 @@
                     <th>Servicios Ofrecidos</th>
                     <th>Precio</th>
                     <th>Plazo</th>
+                    <th>Estado</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -81,6 +94,8 @@
                         <td>{{ $venta->servicios_ofrecidos }}</td>
                         <td>{{ $venta->precio }}</td>
                         <td>{{ $venta->plazo }}</td>
+                        <td class="@if($venta->estado == 'Pendiente') estado-pendiente @elseif($venta->estado == 'Aceptada') estado-aceptada @else estado-rechazada @endif">{{ $venta->estado }}</td>
+
                         <td>
                             <a href="{{ route('venta.edit',['venta'=> $venta]) }}" class="btn btn-info">Editar</a>
                         </td>

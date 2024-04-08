@@ -44,6 +44,8 @@
         <label for="plazo" class="form-label">Plazo</label>
         <input type="date" class="form-control" id="plazo" name="plazo" placeholder="Introduce plazo">
     </div>
+    <input type="hidden" name="estado" value="Pendiente">
+
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 </body>
