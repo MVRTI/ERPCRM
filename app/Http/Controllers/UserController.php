@@ -35,7 +35,7 @@ class UserController extends Controller
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|string|min:8',
-        'role' => 'required|in:admin,user',
+        'role' => 'required|in:Administrador,Gestor de Productos,Gestor de Ventas,Gestor de Clientes',
     ]);
 
     User::create([
@@ -56,7 +56,7 @@ class UserController extends Controller
     $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email,' . $user->id,
-        'role' => 'required|in:admin,user',
+        'role' => 'required|in:Administrador,Gestor de Productos,Gestor de Ventas,Gestor de Clientes',
     ]);
 
     $user->update([

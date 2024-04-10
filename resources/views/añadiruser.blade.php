@@ -91,8 +91,10 @@
         <div class="user-info">
             <label for="role">Rol:</label>
             <select name="role" id="role" required>
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Gestor de Productos">Gestor de Productos</option>
+                <option value="Gestor de Ventas">Gestor de Ventas</option>
+                <option value="Gestor de Clientes">Gestor de Clientes</option>
             </select>
         </div>
 

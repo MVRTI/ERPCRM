@@ -85,8 +85,10 @@
         <div class="user-info">
             <label><strong>Rol:</strong></label>
             <select name="role">
-                <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
+                <option value="Administrador" {{ $user->role === 'Administrador' ? 'selected' : '' }}>Administrador</option>
+                <option value="Gestor de Productos" {{ $user->role === 'Gestor de Productos' ? 'selected' : '' }}>Gestor de Productos</option>
+                <option value="Gestor de Ventas" {{ $user->role === 'Gestor de Ventas' ? 'selected' : '' }}>Gestor de Ventas</option>
+                <option value="Gestor de Clientes" {{ $user->role === 'Gestor de Clientes' ? 'selected' : '' }}>Gestor de Clientes</option>
             </select>
         </div>
 
