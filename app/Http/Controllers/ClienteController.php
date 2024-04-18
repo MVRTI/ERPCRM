@@ -136,6 +136,16 @@ public function update(Request $request, Cliente $cliente)
     return redirect()->route('dashboard')->with('success', 'Cliente actualizado exitosamente.');
 }
 
+public function countByDate()
+    {
+        $clientesPorDia = Cliente::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->get();
+
+        return response()->json($clientesPorDia);
+    }
+
 
     /**
      * Remove the specified resource from storage.

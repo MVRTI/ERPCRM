@@ -30,6 +30,8 @@ Route::resource('clientes', ClienteController::class);
 Route::get('/dashboard', [ClienteController::class, 'dashboard'])->name('clientes.dashboard');
 Route::resource('tipos-clientes', TipoClienteController::class);
 
+Route::get('/api/clientes/count-by-date', [ClienteController::class, 'countByDate']);
+
 Route::get('/ventas',[VentaController::class, 'index'])->name('venta.index');
 Route::get('/ventas/create',[VentaController::class, 'create'])->name('venta.create');
 Route::post('/ventas',[VentaController::class, 'store'])->name('venta.store');

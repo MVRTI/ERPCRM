@@ -38,28 +38,44 @@
     </div>
 
     <script>
-        // Gráfica de Clientes
-        var ctxClientes = document.getElementById('clientesChart').getContext('2d');
-        var clientesChart = new Chart(ctxClientes, {
-            type: 'bar',
-            data: {
-                labels: ['Enero', 'Febrero', 'Marzo', 'Abril'],
-                datasets: [{
-                    label: '# de Clientes',
-                    data: [12, 19, 3, 5],
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+document.addEventListener('DOMContentLoaded', function() {
+    fetchClientesData();
+});
+
+function fetchClientesData() {
+    fetch('/api/clientes/count-by-date')
+        .then(response => response.json())
+        .then(data => {
+            const labels = data.map(item => item.date);
+            const counts = data.map(item => item.count);
+            updateClientesChart(labels, counts);
+        })
+        .catch(error => console.error('Error al obtener datos de clientes:', error));
+}
+
+function updateClientesChart(labels, data) {
+    var ctx = document.getElementById('clientesChart').getContext('2d');
+    var clientesChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Nuevos Clientes',
+                data: data,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
+        }
+    });
+}
 
     var ctxProductos = document.getElementById('productosChart').getContext('2d');
     var productosChart = new Chart(ctxProductos, {
@@ -67,7 +83,7 @@
         data: {
             labels: ['Enero', 'Febrero', 'Marzo', 'Abril'],
             datasets: [{
-                label: '# de Productos Vendidos',
+                label: 'Cantidad de Productos Vendidos',
                 data: [5, 10, 4, 8],
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
