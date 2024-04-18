@@ -11,4 +11,13 @@ class Venta extends Model
     protected $fillable = [
         'nombre','detalles','servicios_ofrecidos','precio','plazo','estado'
     ];
+
+    public function productos()
+    {
+        return $this->belongsToMany(ProductoServicio::class, 'producto_venta')
+                    ->withPivot('cantidad');
+    }
+    
+
+    
 }

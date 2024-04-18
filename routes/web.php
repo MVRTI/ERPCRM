@@ -36,6 +36,8 @@ Route::post('/ventas',[VentaController::class, 'store'])->name('venta.store');
 Route::get('/ventas/{venta}/edit',[VentaController::class, 'edit'])->name('venta.edit');
 Route::put('/ventas/{venta}/edit',[VentaController::class, 'update'])->name('venta.update');
 Route::delete('/ventas/{venta}/delete',[VentaController::class, 'delete'])->name('venta.delete');
+Route::post('/venta/aceptar/{venta}',[VentaController::class,'aceptar'])->name('venta.aceptar');
+Route::post('/venta/rechazar/{venta}',[VentaController::class,'rechazar'])->name('venta.rechazar');
 
 Route::get('/usuarios', function () {
     $users = \App\Models\User::all();

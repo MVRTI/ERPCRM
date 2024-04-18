@@ -10,7 +10,7 @@
 <body>
 <h2>Crear una venta</h2>
 <div>
-    <!-- Muestra los errores de validaciÃ³n con estilo de Bootstrap -->
+    <!-- Muestra los errores de validación con estilo de Bootstrap -->
     @if ($errors->any())
         <ul class="list-group">
             @foreach ($errors->all() as $error)
@@ -21,13 +21,14 @@
 </div>
 
 <!-- Formulario para crear una venta -->
-<form method="post" action ="{{route('venta.store')}}" class="container">
+<form method="post" action="{{ route('venta.store') }}" class="container">
     @csrf
     @method('post')
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Introduce Nombre">
     </div>
+
     <div class="mb-3">
         <label for="detalles" class="form-label">Detalles</label>
         <input type="text" class="form-control" id="detalles" name="detalles" placeholder="Introduce detalles">
@@ -45,6 +46,22 @@
         <input type="date" class="form-control" id="plazo" name="plazo" placeholder="Introduce plazo">
     </div>
     <input type="hidden" name="estado" value="Pendiente">
+
+    <!-- Contenedor para los productos -->
+  <!-- Contenedor para los productos -->
+ <!-- Contenedor para los productos -->
+@foreach ($productos as $producto)
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{ $producto->Nombre }}</h5>
+            <p class="card-text">Stock disponible: {{ $producto->Stock }}</p>
+            <input type="number" class="form-control" id="producto_{{ $producto->id }}" name="productos[{{ $producto->id }}]" min="0" max="{{ $producto->stock }}">
+        </div>
+    </div>
+@endforeach
+
+
+
 
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
