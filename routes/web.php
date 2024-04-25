@@ -40,6 +40,9 @@ Route::put('/ventas/{venta}/edit',[VentaController::class, 'update'])->name('ven
 Route::delete('/ventas/{venta}/delete',[VentaController::class, 'delete'])->name('venta.delete');
 Route::post('/venta/aceptar/{venta}',[VentaController::class,'aceptar'])->name('venta.aceptar');
 Route::post('/venta/rechazar/{venta}',[VentaController::class,'rechazar'])->name('venta.rechazar');
+Route::get('/ventas/valores-aceptadas', [VentaController::class, 'obtenerValoresVentasAceptadas']);
+Route::get('/producto/random', [VentaController::class, 'productoRandomConStock']);
+Route::get('/ventas/contar-por-estado', [VentaController::class, 'contarVentasPorEstado']);
 
 Route::get('/usuarios', function () {
     $users = \App\Models\User::all();

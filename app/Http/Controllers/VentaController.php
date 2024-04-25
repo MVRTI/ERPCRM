@@ -119,6 +119,46 @@ public function delete(Venta $venta){
 
 }
 
+public function productoRandomConStock()
+{
+    try {
+        $producto = ProductoServicio::select('Nombre', 'Stock')
+                    ->inRandomOrder() // Selecciona un producto al azar
+                    ->first(); // Solo devuelve un producto
+
+        return response()->json($producto);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Error al obtener información del producto: ' . $e->getMessage()], 500);
+    }
+}
+
+public function contarVentasPorEstado()
+{
+    try {
+        $ventasPendientes = Venta::where('estado', 'Pendiente')->count();
+        $ventasAceptadas = Venta::where('estado', 'Aceptada')->count();
+
+        return response()->json([
+            'Pendientes' => $ventasPendientes,
+            'Aceptadas' => $ventasAceptadas
+        ]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Error al obtener información de las ventas: ' . $e->getMessage()], 500);
+    }
+}
+public function obtenerValoresVentasAceptadas()
+{
+    try {
+        $ventas = Venta::where('estado', 'Aceptada')
+                        ->orderBy('created_at', 'asc')
+                        ->get(['created_at', 'precio']); // Selecciona solo las columnas necesarias
+
+        return response()->json($ventas);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Error al obtener información de las ventas: ' . $e->getMessage()], 500);
+    }
+}
+
 public function aceptar(Venta $venta){
 
     $venta->estado = 'Aceptada';
