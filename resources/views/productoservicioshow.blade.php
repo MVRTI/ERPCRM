@@ -84,7 +84,7 @@
                         <a href="{{ route('productosservicios.edit', $producto->id) }}" class="btn btn-primary buttonblue">Editar</a>
                     </td>
                     <td>
-                        <form action="{{ route('productosservicios.destroy', $producto->id) }}" method="POST">
+                        <form action="{{ route('productosservicios.destroy', $producto->id) }}" method="DELETE">
                             <button type="submit" class="btn btn-danger buttonred">Eliminar</button>
                         </form>
                     </td>

@@ -34,6 +34,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/ventas/{venta}/delete',[VentaController::class, 'delete'])->name('venta.delete')->middleware('can:gestorSale,venta, App\Models\Venta');
     Route::post('/venta/aceptar/{venta}',[VentaController::class,'aceptar'])->name('venta.aceptar')->middleware('can:gestorSale,venta, App\Models\Venta');
     Route::post('/venta/rechazar/{venta}',[VentaController::class,'rechazar'])->name('venta.rechazar')->middleware('can:gestorSale,venta, App\Models\Venta');
+    Route::get('/ventas/contar-por-estado', [VentaController::class, 'contarVentasPorEstado'])->middleware('can:gestorSale,venta, App\Models\Venta');
+    Route::get('/ventas/valores-aceptadas', [VentaController::class, 'obtenerValoresVentasAceptadas'])->middleware('can:gestorSale,venta, App\Models\Venta');
 });
 
 
@@ -49,6 +51,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/productosservicios/{id}', [ProductoServicioController::class, 'destroy'])->name('productosservicios.destroy')->middleware('can:viewProducts, App\Models\ProductoServicio');
     Route::get('/productosservicios/{id}/edit', [ProductoServicioController::class, 'edit'])->name('productosservicios.edit')->middleware('can:viewProducts, App\Models\ProductoServicio');
     Route::put('/productosservicios/{id}', [ProductoServicioController::class, 'update'])->name('productosservicios.update')->middleware('can:viewProducts, App\Models\ProductoServicio');
+    Route::get('/producto/random', [VentaController::class, 'productoRandomConStock'])->middleware('can:viewProducts, App\Models\ProductoServicio');
 });
 
 
@@ -68,11 +71,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'verified'])->group(function () {Route::get('/ventas/valores-aceptadas', [VentaController::class, 'obtenerValoresVentasAceptadas']);
-Route::get('/producto/random', [VentaController::class, 'productoRandomConStock']);
-Route::get('/ventas/contar-por-estado', [VentaController::class, 'contarVentasPorEstado']);
-
-Route::get('/usuarios', function () {
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/usuarios', function () {
     $users = \App\Models\User::all();
     return view('userslist', compact('users'));
 })->name('usuarios.index');

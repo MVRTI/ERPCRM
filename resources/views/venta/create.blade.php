@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container mt-5">
+
+<a href="{{ route('dashboard') }}" class="btn btn-secondary">Volver al Dashboard</a>
 <h2>Crear una venta</h2>
 <div>
     <!-- Muestra los errores de validación con estilo de Bootstrap -->
@@ -19,6 +22,7 @@
         </ul>
     @endif
 </div>
+
 
 <!-- Formulario para crear una venta -->
 <form method="post" action="{{ route('venta.store') }}" class="container">
@@ -65,5 +69,6 @@
 
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+</div>
 </body>
 </html>
