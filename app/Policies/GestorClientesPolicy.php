@@ -15,4 +15,9 @@ class GestorClientesPolicy
         return $user->role === 'Administrador' || $user->role === 'Gestor de Clientes';
     }
 
+
+    public function paraUsers(User $user)
+    {
+        return $user->role === 'Administrador';
+    }
 }

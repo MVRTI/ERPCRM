@@ -14,17 +14,7 @@ class GestorVentasPolicy
         return $user->role === 'Administrador' || $user->role === 'Gestor de Ventas' || $user->role === 'Gestor de Productos';
     }
 
-    public function createSale(User $user)
-    {
-        return $user->role === 'Administrador' || $user->role === 'Gestor de Ventas';
-    }
-
-    public function updateSale(User $user)
-    {
-        return $user->role === 'Administrador' || $user->role === 'Gestor de Ventas';
-    }
-
-    public function deleteSale(User $user)
+    public function gestorSale(User $user)
     {
         return $user->role === 'Administrador' || $user->role === 'Gestor de Ventas';
     }
