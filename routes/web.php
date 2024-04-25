@@ -92,6 +92,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
+Route::get('/api/clientes/count-by-date', [ClienteController::class, 'countByDate']);
+
+Route::get('/ventas',[VentaController::class, 'index'])->name('venta.index');
+Route::get('/ventas/create',[VentaController::class, 'create'])->name('venta.create');
+Route::post('/ventas',[VentaController::class, 'store'])->name('venta.store');
+Route::get('/ventas/{venta}/edit',[VentaController::class, 'edit'])->name('venta.edit');
+Route::put('/ventas/{venta}/edit',[VentaController::class, 'update'])->name('venta.update');
+Route::delete('/ventas/{venta}/delete',[VentaController::class, 'delete'])->name('venta.delete');
+Route::post('/venta/aceptar/{venta}',[VentaController::class,'aceptar'])->name('venta.aceptar');
+Route::post('/venta/rechazar/{venta}',[VentaController::class,'rechazar'])->name('venta.rechazar');
 
 Route::get('/usuarios', function () {
     $users = \App\Models\User::all();
@@ -108,12 +118,50 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/productos', function () {
+    return view('productoservicioshow');
+})->middleware(['auth', 'verified'])->name('productoservicio.show');
+
+Route::get('/productoscreate', function () {
+    return view('crearproducto');
+})->middleware(['auth', 'verified'])->name('productoservicio.create');
+
+Route::post('/productosservicios', [ProductoServicioController::class, 'store'])->name('productosservicios.store');
+
+Route::get('/producto', [ProductoServicioController::class, 'index'])->middleware(['auth', 'verified'])->name('producto.index');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
-    Route::get('/clientes', [ClienteController::class, 'filtrarclientes'])->name('clientes.filtrarclientes');
+});
+
+Route::delete('/productosservicios/{id}', [ProductoServicioController::class, 'destroy'])->name('productosservicios.destroy');
+
+Route::get('/productosservicios/{id}/edit', [ProductoServicioController::class, 'edit'])->name('productosservicios.edit');
+
+Route::put('/productosservicios/{id}', [ProductoServicioController::class, 'update'])->name('productosservicios.update');
+
+Route::get('/clientgenerator', function () {
+    return view('clientgenerator');
+})->name('clientgenerator');
+
+/*Route::get('/clientes', function () {
+    return view('clientes');
+})->name('clientes.index');*/
+Route::get('/verclientes', [ClienteController::class, 'index'])->name('verclientes.index');
+
+Route::resource('clientes', ClienteController::class);
+Route::resource('tipos-clientes', TipoClienteController::class);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/clientes', [ClienteController::class, 'filtrarclientes'])->name('clientes.filtrarclientes');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::patch('/clientes/{cliente}/cambiarEstado', [ClienteController::class, 'cambiarEstado'])->name('clientes.cambiarEstado');
 });
 

@@ -19,25 +19,27 @@ class ClienteController extends Controller
     }
 
     public function filtrarclientes(Request $request)
-{
-    if ($request->input('filtros') === 'sinfiltros') {
-        return redirect()->route('clientes.index');
+    {
+        if ($request->input('filtros') === 'sinfiltros') {
+            return redirect()->route('verclientes.index');
+        }
+        $clientes = Cliente::query();
+        
+        if ($request->has('poblacionText') && $request->input('filtros') === 'poblacion') {
+            $clientes->where('Dirección', 'LIKE', '%' . $request->input('poblacionText') . '%');
+        }
+        
+        if ($request->input('filtros') === 'Alta') {
+            $clientes->where('Estado', 'Alta'); // Ajusta según la representación de tu base de datos
+        } elseif ($request->input('filtros') === 'Baja') {
+            $clientes->where('Estado', 'Baja'); // Ajusta según la representación de tu base de datos
+        }
+        
+        $clientes = $clientes->get();
+        
+        return view('clientes', compact('clientes'));
     }
-    $clientes = Cliente::query();
-    if ($request->has('poblacionText')) {
-        $clientes->where('Dirección', 'LIKE', '%' . $request->input('poblacionText') . '%');
-    }
-
-    if ($request->input('filtros') === 'Alta') {
-        $clientes->where('Estado', true); 
-    } elseif ($request->input('filtros') === 'Baja') {
-        $clientes->where('Estado', false); 
-    }
-
-    $clientes = $clientes->get();
-
-    return view('clientes', compact('clientes'));
-}
+    
 
     
 
@@ -86,7 +88,7 @@ class ClienteController extends Controller
     
         $cliente->save();
     
-        return redirect()->route('dashboard')->with('success', 'Cliente creado exitosamente.');
+        return redirect()->route('verclientes.index')->with('success', 'Cliente creado exitosamente.');
     }
     
 
@@ -133,6 +135,16 @@ public function update(Request $request, Cliente $cliente)
 
     return redirect()->route('dashboard')->with('success', 'Cliente actualizado exitosamente.');
 }
+
+public function countByDate()
+    {
+        $clientesPorDia = Cliente::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->get();
+
+        return response()->json($clientesPorDia);
+    }
 
 
     /**

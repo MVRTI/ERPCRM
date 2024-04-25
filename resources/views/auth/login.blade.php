@@ -8,7 +8,7 @@
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" style="border-top: none; border-left: none; border-right: none; border-bottom: 1px solid #4262B5; border-radius: 0px;"/>
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
@@ -19,7 +19,7 @@
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
-                            required autocomplete="current-password" />
+                            required autocomplete="current-password" style="border-top: none; border-left: none; border-right: none; border-bottom: 1px solid #4262B5; border-radius: 0px;"  />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
