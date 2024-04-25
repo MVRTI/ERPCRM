@@ -11,7 +11,7 @@ class GestorVentasPolicy
 
     public function viewSales(User $user)
     {
-        return $user->role === 'Administrador' || $user->role === 'Gestor de Ventas';
+        return $user->role === 'Administrador' || $user->role === 'Gestor de Ventas' || $user->role === 'Gestor de Productos';
     }
 
     public function createSale(User $user)

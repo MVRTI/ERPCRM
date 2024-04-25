@@ -39,7 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('productosservicios.store');
 
     Route::get('/producto', [ProductoServicioController::class, 'index'])
-        ->middleware('can:viewProducts, App\Models\ProductoServicio')
+        ->middleware('can:viewProductsVentas, App\Models\ProductoServicio')
         ->name('producto.index');
 
     Route::delete('/productosservicios/{id}', [ProductoServicioController::class, 'destroy'])

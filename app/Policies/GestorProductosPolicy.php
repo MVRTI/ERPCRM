@@ -11,6 +11,11 @@ class GestorProductosPolicy
 
     public function viewProducts(User $user)
     {
+        return $user->role === 'Administrador' || $user->role === 'Gestor de Productos' ;
+    }
+
+    public function viewProductsVentas(User $user)
+    {
         return $user->role === 'Administrador' || $user->role === 'Gestor de Productos' || $user->role === 'Gestor de Ventas';
     }
 }
