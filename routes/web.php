@@ -68,7 +68,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {Route::get('/ventas/valores-aceptadas', [VentaController::class, 'obtenerValoresVentasAceptadas']);
+Route::get('/producto/random', [VentaController::class, 'productoRandomConStock']);
+Route::get('/ventas/contar-por-estado', [VentaController::class, 'contarVentasPorEstado']);
+
 Route::get('/usuarios', function () {
     $users = \App\Models\User::all();
     return view('userslist', compact('users'));
